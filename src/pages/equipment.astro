@@ -1,0 +1,17 @@
+---
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+const systems = [
+ {id:'camera',image:'camera',title:'Круговой обзор',detail:'Камеры по периметру помогают контролировать переднюю кромку, борта и корму. Система 360° доступна как заказная опция.'},
+ {id:'winch',image:'winch',title:'Лебёдка 5,5 т',detail:'Лебёдка установлена внутри корпуса и защищена от ударов. Трос проходит через отдельный канал и направляющий ролик.'},
+ {id:'hydraulics',image:'hydraulics',title:'Бортовая гидравлика',detail:'Два быстроразъёмных соединения размещены под капотом. Управление подключённым оборудованием можно вывести в кабину.'},
+ {id:'lighting',image:'lighting',title:'Свет и питание',detail:'Предусмотрено освещение подкапотной зоны и грузового отсека. Сзади размещены светотехника, камера и точка установки фаркопа.'},
+ {id:'service',image:'service',title:'Ремонт гусениц',detail:'Два комплекта для ремонта гусениц хранятся в машине. Доступ к ним предусмотрен через люк.'},
+ {id:'cargo',image:'cargo',title:'Грузовой отсек',detail:'Отсек оснащён точками крепления груза и подсветкой. Борт можно использовать как сходни для погрузки техники.'},
+];
+---
+<Site title="Оснащение P-41">
+  <section class="sub-hero"><Photo name="trail" alt="Вездеход P-41 на маршруте" eager /><div class="wrap"><h1>Оснащение</h1><p>Камеры, лебёдка, гидравлика, рабочий свет и сервисные зоны.</p></div></section>
+  <nav class="index-links light" aria-label="Рабочие системы"><div class="wrap">{systems.map(s=><a href={`#${s.id}`}>{s.title}</a>)}</div></nav>
+  {systems.map((s,i)=><section class:list={['system',i%2===0?'light':'dark']} id={s.id}><div class="wrap system-grid"><Photo name={s.image} alt={s.title} sizes="(max-width: 760px) 90vw, 53vw" /><div><h2>{s.title}</h2><p>{s.detail}</p></div></div></section>)}
+</Site>

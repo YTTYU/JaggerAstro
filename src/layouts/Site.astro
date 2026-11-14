@@ -1,0 +1,35 @@
+---
+import '../styles/type.css';
+import '../styles/site.css';
+const { title, description = 'Гусеничный вездеход-амфибия P-41. Платформа, оснащение и технические характеристики.', home = false } = Astro.props;
+const links = [['/','Вездеход'],['/specs/','Характеристики'],['/equipment/','Оснащение'],['/gallery/','Галерея']];
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} | Jagger Garage</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+<body class:list={[{ 'home-page': home }]}>
+  <a class="skip" href="#main">К содержанию</a>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="Jagger Garage — главная"><img src="/media/logo-full.svg" width="70" height="61" alt="Jagger Garage" /></a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      {links.map(([href,label]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}
+    </nav>
+    <details class="mobile-nav"><summary>Меню <span aria-hidden="true">+</span></summary><nav aria-label="Основная навигация">{links.map(([href,label]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}<a href="/history/">Наша история</a></nav></details>
+    <a class="header-history" href="/history/">Наша история <span class="arrow" aria-hidden="true"></span></a>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <a href="/" aria-label="Jagger Garage — главная"><img src="/media/logo-full.svg" width="86" height="75" alt="Jagger Garage" loading="lazy" /></a>
+      <nav aria-label="Разделы сайта">{links.map(([href,label]) => <a href={href}>{label}</a>)}<a href="/history/">Наша история</a></nav>
+      <a href="https://t.me/Jagger_garage">Jagger Garage в Telegram <span class="arrow" aria-hidden="true"></span></a>
+    </div>
+  </footer>
+</body>
+</html>

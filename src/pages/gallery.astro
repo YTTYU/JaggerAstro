@@ -1,0 +1,15 @@
+---
+import Site from '../layouts/Site.astro';
+import Photo from '../components/Photo.astro';
+const groups = [
+ {title:'На маршруте',items:[['gallery-field','Вездеход в поле',1800],['gallery-water','Вездеход на воде',1800],['bank','Вездеход у берега',1440],['route','Вездеход на грунтовой дороге',1440]]},
+ {title:'Кабина и кузов',items:[['gallery-cab','Кабина и приборная панель',1800],['controls','Органы управления',1440],['cargo','Грузовой отсек',1440],['gallery-front','Передняя часть кабины',1800]]},
+ {title:'В мастерской',items:[['workshop','Вездеход в мастерской',1440],['story','Сварка рамы',1800],['engine','Силовая установка',1440],['detail','Гусеница и опорные катки',1440]]},
+] as const;
+---
+<Site title="Галерея P-41">
+  <section class="sub-hero"><Photo name="gallery-field" large={1800} alt="П-41 в поле" eager /><div class="wrap"><h1>П-41 снаружи<br />и внутри</h1></div></section>
+  {groups.map((g,i)=><section class:list={['photo-section',i%2===0?'light':'dark']}><div class="wrap"><h2>{g.title}</h2><div class="photo-grid" data-photo-grid>{g.items.map(([name,alt,large])=><a href={`/media/${name}-${large}.webp`}><Photo name={name} alt={alt} large={large} sizes="(max-width: 760px) 94vw, 62vw" /></a>)}</div></div></section>)}
+  <dialog class="photo-dialog" aria-label="Просмотр фотографии"><button class="circle" type="button" autofocus aria-label="Закрыть">×</button></dialog>
+  <script src="../scripts/photo.ts"></script>
+</Site>
