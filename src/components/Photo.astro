@@ -1,5 +1,8 @@
 ---
+import { sitePath } from '../utils/site-path';
 interface Props { name: string; alt: string; sizes?: string; large?: number; eager?: boolean; class?: string; }
 const {name,alt,sizes='100vw',large=1440,eager=false,class:klass} = Astro.props;
+const smallSrc = sitePath(`/media/${name}-640.webp`);
+const largeSrc = sitePath(`/media/${name}-${large}.webp`);
 ---
-<img class={klass} src={`/media/${name}-640.webp`} srcset={`/media/${name}-640.webp 640w, /media/${name}-${large}.webp ${large}w`} sizes={sizes} alt={alt} loading={eager?'eager':'lazy'} fetchpriority={eager?'high':undefined} decoding={eager?'auto':'async'} />
+<img class={klass} src={smallSrc} srcset={`${smallSrc} 640w, ${largeSrc} ${large}w`} sizes={sizes} alt={alt} loading={eager?'eager':'lazy'} fetchpriority={eager?'high':undefined} decoding={eager?'auto':'async'} />

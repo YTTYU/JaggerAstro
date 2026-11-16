@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../utils/site-path';
 import Site from '../layouts/Site.astro';
 import Photo from '../components/Photo.astro';
 import { advantage } from '../content/copy';
@@ -7,7 +8,7 @@ const projects = [
   { id:'pobeda', year:'2021', title:'Победа Ultratank', image:'history-pobeda', detail:'Для «Победы» изменили компоновку, заново настроили ходовую и испытали машину на снегу и воде.' },
   { id:'cayenne', year:'2022', title:'Porsche Cayenne', image:'history-cayenne', detail:'Ходовую испытывали на более быстром и тяжёлом автомобиле: в песчаных дюнах, снегу и на бездорожье.' },
   { id:'p3', year:'2023–2024', title:'ГАЗ-66 / П-3', image:'history-p3', detail:'Для П-3 разработали собственное шасси и установили на него кабину ГАЗ-66. На испытаниях проверяли работу с грузом, движение по воде и ресурс узлов.' },
-  { id:'p41', year:'', title:'P-41', image:'poster', detail:advantage.body[1] },
+  { id:'p41', year:'', title:'P-41', image:'studio-side', detail:advantage.body[1] },
 ];
 const trail = 'M250 0 L250 26 L339 63 L308 105 L475 105 L515 142 L592 126 L674 188 L750 188 L750 260';
 ---
@@ -20,12 +21,12 @@ const trail = 'M250 0 L250 26 L339 63 L308 105 L475 105 L515 142 L592 126 L674 1
         {projects.map(({id,year,title,image,detail}, i) => (
           <div class="route-leg">
             <article class="route-chapter" id={id} aria-labelledby={`title-${id}`}>
-              <Photo name={image} large={id==='p41'?1920:1440} alt={id==='p41'?'P-41 в студии, вид спереди и сбоку':title} sizes="(max-width: 760px) 90vw, 49vw" />
+              <Photo name={image} alt={id==='p41'?'P-41 в студии, вид спереди и сбоку':title} sizes="(max-width: 760px) 90vw, 49vw" />
               <header>
                 {year && <p class="route-year">{year}</p>}
                 <h3 id={`title-${id}`}>{title}</h3>
                 <p>{detail}</p>
-                {i===projects.length-1 && <a class="text-link" href="/#platform">Три исполнения платформы <span class="arrow" aria-hidden="true"></span></a>}
+                {i===projects.length-1 && <a class="text-link" href={sitePath('/#platform')}>Три исполнения платформы <span class="arrow" aria-hidden="true"></span></a>}
               </header>
             </article>
             {i < projects.length-1 && <svg class="route-trail" viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true">

@@ -11,7 +11,7 @@ const systems = [
 ];
 ---
 <Site title="Оснащение P-41">
-  <section class="sub-hero"><Photo name="trail" alt="Вездеход P-41 на маршруте" eager /><div class="wrap"><h1>Оснащение</h1><p>Камеры, лебёдка, гидравлика, рабочий свет и сервисные зоны.</p></div></section>
+  <section class="sub-hero"><Photo name="bodywork" alt="Борт кабины P-41, вид снизу" eager /><div class="wrap"><h1>Оснащение</h1><p>Камеры, лебёдка, гидравлика, рабочий свет и сервисные зоны.</p></div></section>
   <nav class="index-links light" aria-label="Рабочие системы"><div class="wrap">{systems.map(s=><a href={`#${s.id}`}>{s.title}</a>)}</div></nav>
   {systems.map((s,i)=><section class:list={['system',i%2===0?'light':'dark']} id={s.id}><div class="wrap system-grid"><Photo name={s.image} alt={s.title} sizes="(max-width: 760px) 90vw, 53vw" /><div><h2>{s.title}</h2><p>{s.detail}</p></div></div></section>)}
 </Site>

@@ -1,15 +1,33 @@
 ---
+import { sitePath } from '../utils/site-path';
 import Site from '../layouts/Site.astro';
 import Photo from '../components/Photo.astro';
 const groups = [
- {title:'На маршруте',items:[['gallery-field','Вездеход в поле',1800],['gallery-water','Вездеход на воде',1800],['bank','Вездеход у берега',1440],['route','Вездеход на грунтовой дороге',1440]]},
- {title:'Кабина и кузов',items:[['gallery-cab','Кабина и приборная панель',1800],['controls','Органы управления',1440],['cargo','Грузовой отсек',1440],['gallery-front','Передняя часть кабины',1800]]},
- {title:'В мастерской',items:[['workshop','Вездеход в мастерской',1440],['story','Сварка рамы',1800],['engine','Силовая установка',1440],['detail','Гусеница и опорные катки',1440]]},
+ {title:'На маршруте',items:[['bank','P-41 у берега, вид с противоположной стороны',1440],['route-overview','Участники полевого обзора перед P-41',1440],['route-academeg','Полевой обзор P-41, вид на машину в три четверти',1440],['gallery-field','Вездеход в поле',1800],['route','Вездеход на грунтовой дороге',1440]]},
+ {title:'Кабина и кузов',items:[['gallery-cab','Кабина и приборная панель',1800],['controls','Органы управления',1440],['gauges','Аналоговые приборы',1440],['gallery-front','Передняя часть кабины',1800]]},
+ {title:'В мастерской',items:[['workshop-fabrication','Работа над рамой Jagger Garage в цехе',1440],['workshop-seat','Работа с сиденьем у верстака',1440],['workshop-metal','Работа с металлическими деталями в цехе',1440],['story-build','Маркировка Jagger Garage в цехе',1440]]},
 ] as const;
 ---
 <Site title="Галерея P-41">
-  <section class="sub-hero"><Photo name="gallery-field" large={1800} alt="П-41 в поле" eager /><div class="wrap"><h1>П-41 снаружи<br />и внутри</h1></div></section>
-  {groups.map((g,i)=><section class:list={['photo-section',i%2===0?'light':'dark']}><div class="wrap"><h2>{g.title}</h2><div class="photo-grid" data-photo-grid>{g.items.map(([name,alt,large])=><a href={`/media/${name}-${large}.webp`}><Photo name={name} alt={alt} large={large} sizes="(max-width: 760px) 94vw, 62vw" /></a>)}</div></div></section>)}
+  <section class="sub-hero"><Photo name="field-profile" alt="Боковой профиль P-41 в поле" eager /><div class="wrap"><h1>П-41 снаружи<br />и внутри</h1></div></section>
+  {groups.map((g,i) => (
+    <section class:list={['photo-section', i%2===0?'light':'dark']}>
+      <div class="wrap">
+        <h2>{g.title}</h2>
+        <div class="photo-grid" data-photo-grid>
+          {g.items.map(([name,alt,large], index) => (
+            <a href={sitePath(`/media/${name}-${large}.webp`)}>
+              <Photo name={name} alt={alt} large={large} sizes={index===0 && g.items.length%2===1 ? '90vw' : '(max-width: 760px) 90vw, 45vw'} />
+            </a>
+          ))}
+        </div>
+        {i===0 && <div class="gallery-sources">
+          <a class="solid-link" href="https://youtu.be/Ib_kOBQSZfU"><span class="play-icon" aria-hidden="true"></span>Обзор TAKTIK<span class="arrow" aria-hidden="true"></span></a>
+          <a class="solid-link" href="https://youtu.be/bfGL71OC19E"><span class="play-icon" aria-hidden="true"></span>Обзор AcademeG<span class="arrow" aria-hidden="true"></span></a>
+        </div>}
+      </div>
+    </section>
+  ))}
   <dialog class="photo-dialog" aria-label="Просмотр фотографии"><button class="circle" type="button" autofocus aria-label="Закрыть">×</button></dialog>
   <script src="../scripts/photo.ts"></script>
 </Site>

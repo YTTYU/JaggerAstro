@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../utils/site-path';
 import Site from '../layouts/Site.astro';
 import Photo from '../components/Photo.astro';
 const groups = [
@@ -17,7 +18,7 @@ const groups = [
     <div>
       {groups.map(g=><section id={g.id} class="spec-group"><h2>{g.title}</h2><table aria-label={g.title}><tbody>{g.rows.map(([key,value])=><tr><th scope="row">{key}</th><td>{value}</td></tr>)}</tbody></table></section>)}
       <p class="source-note">Данные P-41 приведены по сохранённой странице «Характеристики». Проектные параметры сверены с файлами «сайт весь материал.pdf» и «Сравнительная таблица (1).pdf». Грузоподъёмность и объём баков требуют уточнения: значения в материалах расходятся.</p>
-      <a class="text-link" href="/equipment/">Рабочие системы и опции <span class="arrow" aria-hidden="true"></span></a>
+      <a class="text-link" href={sitePath('/equipment/')}>Рабочие системы и опции <span class="arrow" aria-hidden="true"></span></a>
     </div>
   </div>
   <section class="system dark" id="transport"><div class="wrap system-grid"><Photo name="transport" alt="Перевозка гусеничного вездехода" sizes="(max-width: 760px) 90vw, 53vw" /><div><h2>Транспортировка</h2><p>Вездеход можно доставить эвакуатором или в кузове крытого грузового автомобиля. Для перевозки в морском контейнере гусеничные блоки снимают и размещают в кузове.</p></div></div></section>
