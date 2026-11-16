@@ -23,15 +23,14 @@ const photos = [['gallery-field','Вездеход в поле',1800],['gallery-
     <div class="wrap">
       <div class="platform-head"><h2 id="platform-title">Одна платформа,<br />три исполнения</h2><p>{advantage.body[0]}</p></div>
       <div class="modifier" data-modifier>
-        <label class="dimension-toggle"><input type="checkbox" aria-controls="dimension-overlay" /> Показать размеры</label>
         <div class="variant-stage" aria-live="polite">
           {platformVariants.variants.map((v,i) => <figure id={`variant-${v.key}`} data-panel={v.key} hidden={i!==0}><Photo name={v.key} large={1760} alt={v.desc} sizes="(max-width: 760px) 90vw, 72vw" /></figure>)}
-          <img id="dimension-overlay" src="/media/platform-dimensions.svg" width="4417" height="2350" alt="Размерные линии исходного чертежа платформы" loading="lazy" />
+          <img id="dimension-overlay" src="/media/platform-dimensions.svg" width="4417" height="2350" alt="Размерные линии платформы" loading="lazy" />
         </div>
         <div class="variant-nav" role="group" aria-label="Исполнения платформы">
           {platformVariants.variants.map((v,i) => <button type="button" aria-controls={`variant-${v.key}`} aria-pressed={i === 0} data-variant={v.key}><img src={`/media/${v.key}-640.webp`} alt="" loading="lazy" />{v.label}</button>)}
         </div>
-        <noscript><style>.variant-nav,.dimension-toggle{display:none}.variant-stage figure[hidden]{display:grid!important}</style></noscript>
+        <noscript><style>.variant-nav,#dimension-overlay{display:none}.variant-stage figure[hidden]{display:grid!important}</style></noscript>
       </div>
       <div class="platform-foot"><a class="text-link" href="/specs/#platform-data">Параметры платформы <span class="arrow" aria-hidden="true"></span></a><a class="text-link" href="/equipment/">Дополнительное оснащение <span class="arrow" aria-hidden="true"></span></a></div>
     </div>

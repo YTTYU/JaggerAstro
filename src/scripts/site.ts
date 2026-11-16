@@ -53,6 +53,23 @@ for (const scene of document.querySelectorAll<HTMLElement>('.hero, [data-motion-
 }
 
 const modifier = document.querySelector<HTMLElement>('[data-modifier]')!;
+const stage = modifier.querySelector<HTMLElement>('.variant-stage')!;
+stage.tabIndex = 0;
+stage.setAttribute('role', 'button');
+stage.setAttribute('aria-label', 'Размеры платформы');
+stage.setAttribute('aria-pressed', 'false');
+stage.setAttribute('aria-controls', 'dimension-overlay');
+function toggleDimensions() {
+  stage.setAttribute('aria-pressed', String(stage.getAttribute('aria-pressed') !== 'true'));
+}
+stage.addEventListener('click', (event) => {
+  if (event.pointerType !== 'mouse' || !matchMedia('(any-hover: hover)').matches) toggleDimensions();
+});
+stage.addEventListener('keydown', (event) => {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  if (!event.repeat) toggleDimensions();
+});
 const variants = Array.from(modifier.querySelectorAll<HTMLButtonElement>('[data-variant]'));
 const panels = Array.from(modifier.querySelectorAll<HTMLElement>('[data-panel]'));
 variants.forEach((button) => button.addEventListener('click', () => {
