@@ -39,11 +39,13 @@ for (const scene of document.querySelectorAll<HTMLElement>('.hero, [data-motion-
 
   video.addEventListener('playing', () => video.classList.add('ready'));
   video.addEventListener('ended', () => { finished = true; });
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime < 4.75) return;
-    finished = true;
-    video.pause();
-  });
+  if (!video.loop) {
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime < 4.75) return;
+      finished = true;
+      video.pause();
+    });
+  }
   motion.addEventListener('change', syncFilm);
   document.addEventListener('visibilitychange', syncFilm);
   new IntersectionObserver(([entry]) => {
